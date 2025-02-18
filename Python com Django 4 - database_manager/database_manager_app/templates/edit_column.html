@@ -1,0 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+head>
+    <title>Edit Column</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h2>Edit Column: {{ column.name }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>

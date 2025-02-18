@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Column</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h2>Are you sure you want to delete the column: {{ column.name }}?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+</body>
+</html>

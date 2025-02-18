@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Welcome to the Database Manager</h1>
+    <a href="{% url 'register' %}">Register</a>
+    <a href="{% url 'create_database' %}">Create Database</a>
+    <h2>Your Databases</h2>
+    <ul>
+        {% for db in request.user.database_set.all %}
+            <li><a href="{% url 'database_detail' db.id %}">{{ db.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

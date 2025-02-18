@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Detail</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h2>Database: {{ database.name }}</h2>
+    <a href="{% url 'edit_database' database.id %}">Edit Database</a>
+    <a href="{% url 'delete_database' database.id %}">Delete Database</a>
+    <h3>Tables:</h3>
+    <ul>
+        {% for table in tables %}
+            <li>
+                <a href="{% url 'table_detail' table.id %}">{{ table.name }}</a>
+                <a href="{% url 'edit_table' table.id %}">Edit Table</a>
+                <a href="{% url 'delete_table' table.id %}">Delete Table</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_table' database.id %}">Add Table</a>
+</body>
+</html>

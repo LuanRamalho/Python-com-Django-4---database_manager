@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table Detail</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h2>Table: {{ table.name }}</h2>
+    <h3>Columns:</h3>
+    <ul>
+        {% for column in columns %}
+            <li>
+                {{ column.name }} ({{ column.column_type }})
+                <a href="{% url 'edit_column' column.id %}">Edit Column</a>
+                <a href="{% url 'delete_column' column.id %}">Delete Column</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <h3>Data:</h3>
+    <table border="1">
+        <tr>
+            {% for column in columns %}
+                <th>{{ column.name }}</th>
+            {% endfor %}
+            <th>Actions</th>
+        </tr>
+        {% for row in data.values %}
+            <tr>
+                {% for column in columns %}
+                    <td>
+                        {% for item in row %}
+                            {% if item.column.name == column.name %}
+                                {{ item.value }}
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                {% endfor %}
+                <td>
+                    {% if row %}
+                        <a href="{% url 'edit_data' row.0.id %}">Edit</a>
+                        <a href="{% url 'delete_data' row.0.id %}">Delete</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'add_data' table.id %}">Add Data</a>
+    <a href="{% url 'create_column' table.id %}">Add Column</a>
+    <a href="{% url 'edit_table' table.id %}">Edit Table</a>
+    <a href="{% url 'delete_table' table.id %}">Delete Table</a>
+</body>
+</html>

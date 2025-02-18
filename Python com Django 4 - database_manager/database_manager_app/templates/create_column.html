@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Column</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h2>Create a New Column</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="column_name">Column Name:</label>
+        <input type="text" id="column_name" name="column_name" required>
+        <label for="column_type">Column Type:</label>
+        <select id="column_type" name="column_type" required>
+            <option value="Integer">Integer</option>
+            <option value="Float">Float</option>
+            <option value="Char">Char</option>
+            <option value="VarChar">VarChar</option>
+        </select>
+        <input type="submit" value="Create Column">
+    </form>
+</body>
+</html>
